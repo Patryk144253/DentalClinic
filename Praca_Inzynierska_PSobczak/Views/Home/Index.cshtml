@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Praca_Inzynierska_PSobczak.Models
+
+
+@inject SignInManager<User> signInManager
+@model Praca_Inzynierska_PSobczak.ViewModels.VisitsViewModels.VisitsListViewModel
+
+
+
+@if (signInManager.IsSignedIn(User))
+{
+    <h1>Your Visits</h1>
+    <p>
+        <a asp-controller="Visits" asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <p>Client</p>
+                </th>
+                <th>
+                    <p>VisitsDescription</p>
+                </th>
+                <th>
+                    <p>DoctorId</p>
+                </th>
+                <th>
+                    <p>VisitsDate</p>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Visits)
+            {
+                <tr>
+                    <td>
+                        @item.User.FirstName @item.User.LastName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VisitsDescription)
+                    </td>
+                    <td>
+                        @item.Doctor.FirstName @item.Doctor.LastName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VisitDate)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Visits" asp-action="Edit" asp-route-id="@item.VisitId">Edit</a>
+                        <a class="btn btn-danger" asp-controller="Visits" asp-action="Delete" asp-route-id="@item.VisitId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <h1>Brak zalogowanego użytkownika.</h1>
+    <p>Prosimy o zalogowanie bądź rejestrację.</p>
+}

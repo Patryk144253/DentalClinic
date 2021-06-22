@@ -1,0 +1,50 @@
+﻿@model Praca_Inzynierska_PSobczak.ViewModels.VisitsViewModels.NewVisitViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Visit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label class="control-label">UserTypes</label>
+                <select asp-for="UserId" class="form-control"
+                        asp-items="ViewBag.user"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="VisitsDescription" class="control-label"></label>
+                <input asp-for="VisitsDescription" class="form-control" />
+                <span asp-validation-for="VisitsDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Doctor</label>
+                <select asp-for="DoctorId" class="form-control"
+                        asp-items="ViewBag.doctor"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
